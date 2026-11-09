@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador Seguro de Senhas Aleatórias</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Gerador Seguro de Senhas</h1>
+
+        <!-- FORMULÁRIO -->
+        <section class="card">
+            <h2>1. Configure sua senha</h2>
+            <label for="tamanho">Tamanho da senha (<span id="valorTamanho">12</span>)</label>
+            <input type="range" id="tamanho" min="4" max="32" value="12"
+                   oninput="document.getElementById('valorTamanho').textContent = this.value">
+
+            <div class="opcoes">
+                <label><input type="checkbox" id="usarMaiusculas" checked> Maiúsculas (A-Z)</label>
+                <label><input type="checkbox" id="usarMinusculas" checked> Minúsculas (a-z)</label>
+                <label><input type="checkbox" id="usarNumeros" checked> Números (0-9)</label>
+                <label><input type="checkbox" id="usarSimbolos"> Símbolos (!@#$...)</label>
+            </div>
+
+            <button id="btnGerar">🎲 Gerar Senha</button>
+            <button id="btnCopiar">📋 Copiar</button>
+
+            <div class="resultado" id="resultadoSenha">Clique em "Gerar Senha"...</div>
+            <div class="info" id="infoForca"></div>
+        </section>
+
+        <!-- FLUXOGRAMA -->
+        <section class="card">
+            <h2>2. Fluxograma do algoritmo</h2>
+            <pre class="fluxograma">
+    [Início]
+        │
+        ▼
+  ◇ Tem tamanho válido? ── Não ──► [Erro: ajustar tamanho]
+        │ Sim
+        ▼
+  ◇ Pelo menos 1 tipo selecionado? ── Não ──► [Erro: selecionar tipo]
+        │ Sim
+        ▼
+  → Montar alfabeto com os tipos escolhidos
+        │
+        ▼
+  → Para cada posição (for of): sortear caractere
+        │
+        ▼
+  ◇ Senha atende critérios de força? ── Não ──► [Regenerar]
+        │ Sim
+        ▼
+  → Aplicar replace() para remover caracteres ambíguos
+        │
+        ▼
+    [Exibir senha] ──► [Fim]
+            </pre>
+        </section>
+
+        <!-- VALIDAÇÃO -->
+        <section class="card">
+            <h2>3. Teste sua própria senha</h2>
+            <label for="senhaTeste">Digite uma senha para análise:</label>
+            <input type="text" id="senhaTeste" placeholder="Ex: MinhaSenha123!">
+            <button id="btnAnalisar">🔍 Analisar Força</button>
+            <div class="resultado" id="resultadoAnalise">Aguardando...</div>
+        </section>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
